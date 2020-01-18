@@ -1,47 +1,55 @@
 // Write your JavaScript here
+// remainder = given % due;
+console.log('hi liz')
 
-function calculateChange(due, given) {
-    var coins = {
-      dollar: 100,
-      quarter: 25,
-      dime: 10,
-      nickel: 5,
-      penny: 1,
-    };
-    var remainder = given - due;
-  remainder = remainder * 100;
-  while (remainder > 0) {
-    console.log(remainder);
-    if (remainder > 100) {
-      remainder = remainder - 100;
-      coins.dollar++;
+function calculateChange(amountGiven, amountDue) {
+    console.log('calculateChange runs!!!')
+
+    var amountReceived = document.getElementById("amount-received").value;
+    var amountDue = document.getElementById("amount-due").value;
+    var changeDue = amountReceived - amountDue;
+    var dollarsDue = Math.floor(changeDue);
+    var centsDue = ((changeDue - dollarsDue) * 100).toFixed(0);
+    console.log('amountReceived: ', amountReceived, 'amountDue: ', amountDue)
+    console.log('changeDue: ', changeDue)
+
+    document.getElementById('dollars-output').innerText = dollarsDue;
+
+   
+        dollars =  Math.floor(centsDue/100);
+        console.log('dollars: ', dollars)
+        centsDue -= dollars * 100;
+        console.log('centsDue: ', centsDue)
+
+    
+        quarters =  Math.floor(centsDue/25);
+        centsDue -= quarters * 25;
+        document.getElementById('quarters-output').innerText = quarters;
+        
+
+        dimes =  Math.floor(centsDue/10);
+        centsDue -= dimes * 10;
+        document.getElementById('dimes-output').innerText = dimes;
+        
+      
+        nickels =  Math.floor(centsDue/5);
+        centsDue -= nickels*5;
+        document.getElementById('nickels-output').innerText= nickels;
+        
+
+        pennies =  Math.floor(centsDue/1);
+        document.getElementById('pennies-output').innerText = pennies;
+        
+     
     }
-    if (remainder > 25) {
-      remainder = remainder - 25;
-      coins.quarter++;
-    }
-    if (remainder > 10) {
-      remainder = remainder - 10
-      coins.dime++;
-    }
-    if (remainder > 5) {
-      remainder = remainder - 5
-      coins.nickel++;
-    }
-    if (remainder >= 1) {
-      remainder = remainder - 1
-      coins.penny++;
-    }
-  }
-  return coins;
-}
-document.getElementById("calculate").addEventListener("click", function () {
-    var due = document.getElementById("due").value;
-    var given = document.getElementById("given").value;
-    var result = calculateChange(due, given);
-    document.getElementById('output-dollar').innerHTML = result.dollar + ' dollars';
-    document.getElementById('output-quarter').innerHTML = result.quarter + ' quarters';
-    document.getElementById('output-dime').innerHTML = result.dime + ' dimes';
-    document.getElementById('output-nickel').innerHTML = result.nickel + ' nickels';
-    document.getElementById('output-penny').innerHTML = result.penny + ' pennies';
-  });
+    
+    document.getElementById('calculate-change').addEventListener('click', calculateChange);
+    
+
+
+
+
+
+
+
+
